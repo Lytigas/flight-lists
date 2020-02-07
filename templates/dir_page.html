@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }} | Flight List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css"
+    />
+    <style>
+      div {
+        font-size: 1.3em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>{{ title }}</h1>
+    {% if dirs %}
+    <h2>Subdirs</h2>
+    {% for dir in dirs %}
+    <a href="{{ dir + '/index.html' }}">
+      <div>{{ dir }}</div>
+    </a>
+    {% endfor %} {% endif %} {% if lists %}
+    <h2>Lists</h2>
+    {% for list in lists %}
+    <a href="{{ list + '.html' }}">
+      <div>{{ list }}</div>
+    </a>
+    {% endfor %} {% endif %}
+  </body>
+</html>

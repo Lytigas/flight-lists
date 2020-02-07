@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }} | Flight List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css"
+    />
+    <style>
+      label {
+        font-size: 1.5em;
+      }
+      input {
+        width: 0.7em;
+        height: 0.7em;
+      }
+      #complete {
+        margin-top: 1em;
+      }
+      #complete > div {
+        font-size: 2em;
+        padding: 0.2em;
+      }
+      #complete .true {
+        background-color: #48c774;
+        color: #fff;
+      }
+      #complete .false {
+        background-color: #ffdd57;
+        color: rgba(0, 0, 0, 0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>{{ title }}</h1>
+    {% for item in checklist %}
+    <label><input type="checkbox"/>{{ item }}<br /></label>
+    {% endfor %}
+    <div id="complete"></div>
+    <script>
+      listener = () => {
+        complete = Array.from(
+          document.querySelectorAll("input[type=checkbox]")
+        ).every(el => el.checked);
+        if (complete) {
+          document.getElementById("complete").innerHTML =
+            '<div class="true">Complete</div>';
+        } else {
+          document.getElementById("complete").innerHTML =
+            '<div class="false">Incomplete</div>';
+        }
+      };
+
+      document.querySelectorAll("input[type=checkbox]").forEach(el => {
+        el.addEventListener("change", _e => {
+          listener();
+        });
+      });
+
+      // reset
+      document
+        .querySelectorAll("input[type=checkbox]")
+        .forEach(el => (el.checked = false));
+      listener();
+    </script>
+  </body>
+</html>
